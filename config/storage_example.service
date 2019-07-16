@@ -1,0 +1,18 @@
+[Unit]
+Description=BlogCoin Storage Daemon
+After=network.target
+
+[Service]
+Type=simple
+GuessMainPID=no
+ExecStart=/usr/local/src/blogcoin-storage-server/build/httpserver/storage-server 0.0.0.0 38123
+Restart=always
+User=blogcoindaemon
+
+[Install]
+WantedBy=multi-user.target
+# add blogcoindaemon user and write this file to /lib/systemd/system/blogcoinstore.service
+# sudo systemctl enable blogcoinstore
+# sudo systemctl daemon-reload
+# sudo systemctl start blogcoinstore
+# sudo journalctl -f -u blogcoinstore 

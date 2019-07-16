@@ -1,0 +1,19 @@
+[Unit]
+Description=BlogCoin Service Node Daemon
+After=network.target
+
+[Service]
+Type=simple
+GuessMainPID=no
+ExecStart=/usr/local/src/blogcoin/build/bin/blogcoind --non-interactive --service-node --service-node-public-ip 123.123.123.123 --storage-server-port 38123
+Restart=always
+User=blogcoindaemon
+
+[Install]
+WantedBy=multi-user.target
+# replace 123.123.123.123 with real IP, port can be any number of choice
+# add blogcoindaemon user and write this file to /lib/systemd/system/snblogcoin.service
+# sudo systemctl enable snblogcoin
+# sudo systemctl daemon-reload
+# sudo systemctl start snblogcoin
+# sudo journalctl -f -u snblogcoin 

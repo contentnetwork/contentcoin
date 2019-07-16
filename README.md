@@ -1,7 +1,7 @@
 # BlogCoin
 
 <p align="center">
-    <a href="https://github.com/contentnetwork/blogcoin/commits/dev"><img alt="pipeline status" src="https://raw.githubusercontent.com/contentnetwork/blogcoin/master/logo/blog30x36.png" /></a>
+    <a href="https://github.com/contentnetwork/blogcoin/commits/dev"><img alt="pipeline status" src="https://raw.githubusercontent.com/contentnetwork/blogcoin/master/config/blog30x36.png" /></a>
 </p>
 
 - Copyright (c) 2019 The Blogcoin Project.
