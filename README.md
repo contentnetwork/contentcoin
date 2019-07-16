@@ -16,9 +16,8 @@
 | Operating System      | Processor | Status |
 | --------------------- | -------- |--------|
 
-- Web: [theblogcoin.xyz](https://theblogcoin.xyz)
-- Telegram: [t.me/BlogCoinCommunity](https://t.me/BlogCoinCommunity)
-- Mail: [team@theblogcoin.xyz](mailto:team@theblogcoin.xyz)
+- Blogcoin Platform: [theblogcoin.xyz](https://theblogcoin.xyz)
+- Explorer : [explorer-blog.semipool.com](https://explorer-blog.semipool.com)
 - GitHub: [https://github.com/contentnetwork/blogcoin](https://github.com/contentnetwork/blogcoin)
 - Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
 
