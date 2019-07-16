@@ -84,7 +84,7 @@ FreeBSD one liner for required to build dependencies
 
 Clone recursively to pull-in needed submodule(s):
 
-`$ git clone --recursive https://github.com/blogcoin/blogcoin`
+`$ git clone --recursive https://github.com/contentnetwork/blogcoin`
 
 If you already have a repo cloned, initialize and update:
 
@@ -163,7 +163,7 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * Clone blogcoin and checkout most recent release version:
 ```
-        git clone https://github.com/blogcoin/blogcoin.git
+        git clone https://github.com/contentnetwork/blogcoin.git
 	cd blogcoin
 	git checkout master
 ```
@@ -257,7 +257,7 @@ application.
 
 * To git clone, run:
 
-        git clone --recursive https://github.com/blogcoin/blogcoin.git
+        git clone --recursive https://github.com/contentnetwork/blogcoin.git
 
 **Building**
 
@@ -265,7 +265,7 @@ application.
 	
         cd ~/blogcoin
 
-* **Optional**: if you would like a specific [version/tag](https://github.com/blogcoin/blogcoin/tags), do a git checkout for that version. eg. 'v2.0.3'. If you dont care about the version and just want binaries from master, skip this step:
+* **Optional**: if you would like a specific [version/tag](https://github.com/contentnetwork/blogcoin/tags), do a git checkout for that version. eg. 'v2.0.3'. If you dont care about the version and just want binaries from master, skip this step:
 	
         git checkout v2.0.3
 
