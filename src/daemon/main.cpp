@@ -279,7 +279,7 @@ int main(int argc, char const * argv[])
       tools::set_max_concurrency(command_line::get_arg(vm, daemon_args::arg_max_concurrency));
 
     // logging is now set up
-    MGINFO("BitToro '" << LOKI_RELEASE_NAME << "' (v" << LOKI_VERSION_FULL << ")");
+    MGINFO("BlogCoin '" << LOKI_RELEASE_NAME << "' (v" << LOKI_VERSION_FULL << ")");
 
     // If there are positional options, we're running a daemon command
     {
