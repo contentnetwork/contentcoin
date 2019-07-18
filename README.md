@@ -17,7 +17,7 @@
 | --------------------- | -------- |--------|
 
 - Blogcoin Platform: [theblogcoin.xyz](https://theblogcoin.xyz)
-- Explorer : [explorer-blog.semipool.com](https://explorer-blog.semipool.com)
+- Explorer : [explorer-blog.semipool.com](http://explorer-blog.semipool.com)
 - GitHub: [https://github.com/contentnetwork/blogcoin](https://github.com/contentnetwork/blogcoin)
 - Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
 
