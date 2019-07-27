@@ -460,8 +460,9 @@ namespace nodetool
     }
     else
     {
-      full_addrs.insert("212.47.251.15:19292");   // BitToro EU
-      full_addrs.insert("163.172.135.150:19292");   // BitToro US
+      full_addrs.insert("212.47.251.15:19292");   // BlogCoin EU
+      full_addrs.insert("163.172.135.150:19292");   // BlogCoin US
+      full_addrs.insert("207.180.227.16:19292");   // BlogCoin Wrkzdev
     }
     return full_addrs;
   }
