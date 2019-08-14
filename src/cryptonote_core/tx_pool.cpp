@@ -1119,15 +1119,83 @@ namespace cryptonote
     }
   }
   //---------------------------------------------------------------------------------
-  bool tx_memory_pool::on_blockchain_inc(uint64_t new_block_height, const crypto::hash& top_block_id)
+  bool tx_memory_pool::on_blockchain_inc(service_nodes::service_node_list const &service_node_list, block const &blk)
   {
     CRITICAL_REGION_LOCAL(m_transactions_lock);
     m_input_cache.clear();
     m_parsed_tx_cache.clear();
+
+    std::vector<transaction> pool_txs;
+    get_transactions(pool_txs);
+    if (pool_txs.empty()) return true;
+
+    // NOTE: For transactions in the pool, on new block received, if a Service
+    // Node changed state any older state changes that the node cannot
+    // transition to now are invalid and cannot be used, so take them out from
+    // the pool.
+
+    // Otherwise multiple state changes can queue up until they are applicable
+    // and be applied on the node.
+    for (transaction const &pool_tx : pool_txs)
+    {
+      tx_extra_service_node_state_change state_change;
+      crypto::public_key service_node_pubkey;
+      if (pool_tx.type == txtype::state_change &&
+          get_service_node_state_change_from_tx_extra(pool_tx.extra, state_change, blk.major_version))
+      {
+        if (service_node_list.get_quorum_pubkey(service_nodes::quorum_type::obligations,
+                                                service_nodes::quorum_group::worker,
+                                                state_change.block_height,
+                                                state_change.service_node_index,
+                                                service_node_pubkey))
+        {
+          crypto::hash tx_hash;
+          if (!get_transaction_hash(pool_tx, tx_hash))
+          {
+            MERROR("Failed to get transaction hash from txpool to check if we can prune a state change");
+            continue;
+          }
+
+          txpool_tx_meta_t meta;
+          if (!m_blockchain.get_txpool_tx_meta(tx_hash, meta))
+          {
+            MERROR("Failed to get tx meta from txpool to check if we can prune a state change");
+            continue;
+          }
+
+          if (meta.kept_by_block) // Do not prune transaction if kept by block (belongs to alt block, so we need incase we switch to alt-chain)
+            continue;
+
+          std::vector<service_nodes::service_node_pubkey_info> service_node_array = service_node_list.get_service_node_list_state({service_node_pubkey});
+
+          // TODO(loki): Temporary HF12 code. We want to use HF13 code for
+          // detecting if a service node can change state for pruning from the
+          // pool, because changing the pool code here is not consensus, but we
+          // want this logic so as to improve the network behaviour regarding
+          // multiple queued up state changes without a hard fork.
+
+          // Once we hard fork to v13 we can just use the blk major version
+          // whole sale.
+          uint8_t enforce_hf_version = std::max((uint8_t)cryptonote::network_version_13, blk.major_version);
+
+          if (service_node_array.empty() ||
+              !service_node_array[0].info->can_transition_to_state(enforce_hf_version, state_change.block_height, state_change.state))
+          {
+            transaction tx;
+            cryptonote::blobdata blob;
+            size_t tx_weight;
+            uint64_t fee;
+            bool relayed, do_not_relay, double_spend_seen;
+            take_tx(tx_hash, tx, blob, tx_weight, fee, relayed, do_not_relay, double_spend_seen);
+          }
+        }
+      }
+    }
+
     return true;
   }
   //---------------------------------------------------------------------------------
-  bool tx_memory_pool::on_blockchain_dec(uint64_t new_block_height, const crypto::hash& top_block_id)
+  bool tx_memory_pool::on_blockchain_dec()
   {
     CRITICAL_REGION_LOCAL(m_transactions_lock);
     m_input_cache.clear();
@@ -1402,6 +1470,11 @@ namespace cryptonote
       if (max_total_weight < total_weight + meta.weight)
       {
         LOG_PRINT_L2("  would exceed maximum block weight");
+        continue;
+      }
+      
+      if (total_weight > 50000 && meta.weight > 50000)       {
+        LOG_PRINT_L0(" would exceed maximum block weight");
         continue;
       }
 

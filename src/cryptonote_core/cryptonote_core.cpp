@@ -1413,7 +1413,7 @@ namespace cryptonote
     NOTIFY_UPTIME_PROOF::request req = m_service_node_list.generate_uptime_proof(m_service_node_pubkey, m_service_node_key, m_sn_public_ip, m_storage_port);
 
     cryptonote_connection_context fake_context = AUTO_VAL_INIT(fake_context);
-    bool relayed = get_protocol()->relay_uptime_proof(req, fake_context);
+    bool relayed = get_protocol()->relay_uptime_proof(req, fake_context, true /*force_relay*/);
     if (relayed)
       MGINFO("Submitted uptime-proof for service node (yours): " << m_service_node_pubkey << " with storage server at " << (epee::net_utils::ipv4_network_address{ m_sn_public_ip, m_storage_port }).str());
 
@@ -1441,39 +1441,14 @@ namespace cryptonote
   //-----------------------------------------------------------------------------------------------
   bool core::relay_service_node_votes()
   {
-    std::vector<service_nodes::quorum_vote_t> relayable_votes = m_quorum_cop.get_relayable_votes(get_current_blockchain_height());
-    uint8_t hf_version = get_blockchain_storage().get_current_hard_fork_version();
-    if (hf_version < cryptonote::network_version_12_checkpointing)
+    NOTIFY_NEW_SERVICE_NODE_VOTE::request req = {};
+    req.votes                                 = m_quorum_cop.get_relayable_votes(get_current_blockchain_height());
+    if (req.votes.size())
     {
-      NOTIFY_NEW_DEREGISTER_VOTE::request req = {};
-      for (service_nodes::quorum_vote_t const &vote : relayable_votes)
+      cryptonote_connection_context fake_context = AUTO_VAL_INIT(fake_context);
+      if (get_protocol()->relay_service_node_votes(req, fake_context))
       {
-        service_nodes::legacy_deregister_vote legacy_vote = {};
-        if (service_nodes::convert_deregister_vote_to_legacy(vote, legacy_vote))
-          req.votes.push_back(legacy_vote);
-      }
-
-      if (req.votes.size())
-      {
-        cryptonote_connection_context fake_context = AUTO_VAL_INIT(fake_context);
-        if (get_protocol()->relay_deregister_votes(req, fake_context))
-        {
-          m_quorum_cop.set_votes_relayed(relayable_votes);
-        }
-      }
-    }
-    else
-    {
-      // Get relayable votes
-      NOTIFY_NEW_SERVICE_NODE_VOTE::request req = {};
-      req.votes                                 = std::move(relayable_votes);
-      if (req.votes.size())
-      {
-        cryptonote_connection_context fake_context = AUTO_VAL_INIT(fake_context);
-        if (get_protocol()->relay_service_node_votes(req, fake_context))
-        {
-          m_quorum_cop.set_votes_relayed(req.votes);
-        }
+        m_quorum_cop.set_votes_relayed(req.votes);
       }
     }
 
@@ -1551,30 +1526,28 @@ namespace cryptonote
   bool core::handle_block_found(block& b, block_verification_context &bvc)
   {
     bvc = boost::value_initialized<block_verification_context>();
-    m_miner.pause();
     std::vector<block_complete_entry> blocks;
-    try
+    m_miner.pause();
     {
-      blocks.push_back(get_block_complete_entry(b, m_mempool));
+      LOKI_DEFER { m_miner.resume(); };
+      try
+      {
+        blocks.push_back(get_block_complete_entry(b, m_mempool));
+      }
+      catch (const std::exception &e)
+      {
+        return false;
+      }
+      std::vector<block> pblocks;
+      if (!prepare_handle_incoming_blocks(blocks, pblocks))
+      {
+        MERROR("Block found, but failed to prepare to add");
+        return false;
+      }
+      add_new_block(b, bvc, nullptr /*checkpoint*/);
+      cleanup_handle_incoming_blocks(true);
+      m_miner.on_block_chain_update();
     }
-    catch (const std::exception &e)
-    {
-      m_miner.resume();
-      return false;
-    }
-    std::vector<block> pblocks;
-    if (!prepare_handle_incoming_blocks(blocks, pblocks))
-    {
-      MERROR("Block found, but failed to prepare to add");
-      m_miner.resume();
-      return false;
-    }
-    add_new_block(b, bvc, nullptr /*checkpoint*/);
-    cleanup_handle_incoming_blocks(true);
-    //anyway - update miner template
-    update_miner_block_template();
-    m_miner.resume();
-
 
     CHECK_AND_ASSERT_MES(!bvc.m_verifivation_failed, false, "mined block failed verification");
     if(bvc.m_added_to_main_chain)
@@ -1687,7 +1660,7 @@ namespace cryptonote
     }
     add_new_block(*b, bvc, checkpoint);
     if(update_miner_blocktemplate && bvc.m_added_to_main_chain)
-       update_miner_block_template();
+       m_miner.on_block_chain_update();
     return true;
 
     CATCH_ENTRY_L0("core::handle_incoming_block()", false);
@@ -1802,12 +1775,6 @@ namespace cryptonote
     return m_mempool.print_pool(short_format);
   }
   //-----------------------------------------------------------------------------------------------
-  bool core::update_miner_block_template()
-  {
-    m_miner.on_block_chain_update();
-    return true;
-  }
-  //-----------------------------------------------------------------------------------------------
   static bool check_storage_server_ping(time_t last_time_storage_server_pinged)
   {
     const auto elapsed = std::time(nullptr) - last_time_storage_server_pinged;
@@ -1825,12 +1792,11 @@ namespace cryptonote
     // wait one block before starting uptime proofs.
     std::vector<service_nodes::service_node_pubkey_info> const states = get_service_node_list_state({ m_service_node_pubkey });
 
-    if (!states.empty() && (states[0].info.registration_height + 1) < get_current_blockchain_height())
+    if (!states.empty() && (states[0].info->registration_height + 1) < get_current_blockchain_height())
     {
-      // Code snippet from Github @Jagerman
-      service_nodes::service_node_info const &info = states[0].info;
+      service_nodes::service_node_info const &info = *states[0].info;
       m_check_uptime_proof_interval.do_call([&info, this]() {
-        if (info.proof.timestamp <= static_cast<uint64_t>(time(nullptr) - UPTIME_PROOF_FREQUENCY_IN_SECONDS))
+        if (info.proof->timestamp <= static_cast<uint64_t>(time(nullptr) - UPTIME_PROOF_FREQUENCY_IN_SECONDS))
         {
           uint8_t hf_version = get_blockchain_storage().get_current_hard_fork_version();
 
@@ -2216,20 +2182,17 @@ namespace cryptonote
   //-----------------------------------------------------------------------------------------------
   const std::vector<service_nodes::key_image_blacklist_entry> &core::get_service_node_blacklisted_key_images() const
   {
-    const auto &result = m_service_node_list.get_blacklisted_key_images();
-    return result;
+    return m_service_node_list.get_blacklisted_key_images();
   }
   //-----------------------------------------------------------------------------------------------
   std::vector<service_nodes::service_node_pubkey_info> core::get_service_node_list_state(const std::vector<crypto::public_key> &service_node_pubkeys) const
   {
-    std::vector<service_nodes::service_node_pubkey_info> result = m_service_node_list.get_service_node_list_state(service_node_pubkeys);
-    return result;
+    return m_service_node_list.get_service_node_list_state(service_node_pubkeys);
   }
   //-----------------------------------------------------------------------------------------------
   bool core::add_service_node_vote(const service_nodes::quorum_vote_t& vote, vote_verification_context &vvc)
   {
-    bool result = m_quorum_cop.handle_vote(vote, vvc);
-    return result;
+    return m_quorum_cop.handle_vote(vote, vvc);
   }
   //-----------------------------------------------------------------------------------------------
   bool core::get_service_node_keys(crypto::public_key &pub_key, crypto::secret_key &sec_key) const
