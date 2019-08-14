@@ -3921,61 +3921,6 @@ bool BlockchainLMDB::get_top_checkpoint(checkpoint_t &checkpoint) const
   return result;
 }
 
-std::vector<checkpoint_t> BlockchainLMDB::get_checkpoints_range(uint64_t start, uint64_t end, size_t num_desired_checkpoints) const
-{
-  LOG_PRINT_L3("BlockchainLMDB::" << __func__);
-  check_open();
-  std::vector<checkpoint_t> result;
-
-  checkpoint_t top_checkpoint = {};
-  if (!get_top_checkpoint(top_checkpoint))
-    return result;
-
-  if (top_checkpoint.height < std::min(start, end))
-    return result;
-
-  if (end > start)
-    end = std::min(top_checkpoint.height, end);
-
-  if (num_desired_checkpoints == BlockchainDB::GET_ALL_CHECKPOINTS)
-    num_desired_checkpoints = std::numeric_limits<decltype(num_desired_checkpoints)>::max();
-  else
-    result.reserve(num_desired_checkpoints);
-
-  for (uint64_t height = start;
-       height != end && result.size() < num_desired_checkpoints;
-       )
-  {
-    checkpoint_t checkpoint;
-    if (get_block_checkpoint(height, checkpoint))
-      result.push_back(checkpoint);
-
-    if (end >= start) height++;
-    else height--;
-  }
-
-  if (result.size() < num_desired_checkpoints)
-  {
-    // NOTE: Inclusive of end height
-    checkpoint_t checkpoint;
-    if (get_block_checkpoint(end, checkpoint))
-      result.push_back(checkpoint);
-  }
-
-
-  return result;
-}
-
-uint64_t BlockchainLMDB::get_checkpoint_immutable_height() const
-{
-  size_t constexpr NUM_CHECKPOINTS = service_nodes::CHECKPOINT_NUM_CHECKPOINTS_FOR_CHAIN_FINALITY;
-  std::vector<checkpoint_t> const checkpoints = get_checkpoints_range(height(), 0, NUM_CHECKPOINTS);
-  uint64_t result = 0;
-  if (checkpoints.size() == NUM_CHECKPOINTS)
-    result = checkpoints.back().height;
-  return result;
-}
-
 void BlockchainLMDB::pop_block(block& blk, std::vector<transaction>& txs)
 {
   LOG_PRINT_L3("BlockchainLMDB::" << __func__);
