@@ -80,7 +80,7 @@ namespace cryptonote {
     return CRYPTONOTE_MAX_TX_SIZE;
   }
   //-----------------------------------------------------------------------------------------------
-  uint64_t block_reward_unpenalized_formula_v7(uint64_t already_generated_coins, uint64_t height)
+  uint64_t block_reward_unpenalized_formula_v7(uint64_t already_generated_coins, uint64_t height, size_t median_weight)
   {
     uint64_t emission_supply_component = (already_generated_coins * EMISSION_SUPPLY_MULTIPLIER) / EMISSION_SUPPLY_DIVISOR;
     uint64_t result = (EMISSION_LINEAR_BASE - emission_supply_component) / EMISSION_DIVISOR;
@@ -114,7 +114,7 @@ namespace cryptonote {
 
     uint64_t base_reward = version >= network_version_8
                                ? block_reward_unpenalized_formula_v8(height, version)
-                               : block_reward_unpenalized_formula_v7(already_generated_coins, height);
+                               : block_reward_unpenalized_formula_v7(already_generated_coins, height, median_weight);
     uint64_t full_reward_zone = get_min_block_weight(version);
 
     //make it soft
