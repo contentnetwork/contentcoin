@@ -100,7 +100,7 @@ namespace cryptonote {
     uint64_t result = 0;
     // SEEME
     if (version >= network_version_13_enforce_checkpoints) {
-        result = 20000000000.0 + 100000000000.0 / loki::exp2(height / (1440.0 * 360.0)); // halved every year. - 1 year
+        result = 30000000000.0 + 400000000000.0 / loki::exp2(height / (1440.0 * 90.0)); // halve every 90 days.
         result -= result % 100; // remove 2 last digits at HF V13
     } else {
         result = 30000000000.0 + 400000000000.0 / loki::exp2(height / (1440.0 * 360.0)); // halved every year. - 1 year
