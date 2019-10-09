@@ -94,13 +94,13 @@ namespace cryptonote {
     return result;
   }
 
-  uint64_t block_reward_unpenalized_formula_v8(uint64_t height)
+  uint64_t block_reward_unpenalized_formula_v8(uint64_t height, uint8_t version)
   {
     std::fesetround(FE_TONEAREST);
     uint64_t result = 0;
     // SEEME
     result = 30000000000.0 + 400000000000.0 / loki::exp2(height / (1440.0 * 360.0)); // halved every year. - 1 year
-    result -= result % 100; // remove 2 last digits at HF V13
+    if (version >= network_version_13_enforce_checkpoints) result -= result % 100; // remove 2 last digits at HF V13
     return result;
   }
 
@@ -109,7 +109,7 @@ namespace cryptonote {
     static_assert(DIFFICULTY_TARGET_V2%60==0,"difficulty targets must be a multiple of 60");
 
     uint64_t base_reward = version >= network_version_8
-                               ? block_reward_unpenalized_formula_v8(height)
+                               ? block_reward_unpenalized_formula_v8(height, version)
                                : block_reward_unpenalized_formula_v7(already_generated_coins, height);
     uint64_t full_reward_zone = get_min_block_weight(version);
 
