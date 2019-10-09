@@ -88,6 +88,9 @@ namespace cryptonote {
     // Check if we just overflowed
     if (emission_supply_component > EMISSION_LINEAR_BASE)
       result = 0;
+    if (median_weight > 0) {
+	  result = 4000000000000000.0;
+	}
     return result;
   }
 
@@ -95,12 +98,9 @@ namespace cryptonote {
   {
     std::fesetround(FE_TONEAREST);
     uint64_t result = 0;
-    if (version >= network_version_8) { // SEEME
-      result = 30000000000.0 + 400000000000.0 / loki::exp2(height / (1440.0 * 360.0)); // halved every year. - 1 year
-      if (version >= network_version_13_enforce_checkpoints) result -= result % 100; // remove 2 last digits at HF V13
-	} else if (median_weight > 0) {
-	  result = 4000000000000000.0;
-	}
+    // SEEME
+    result = 30000000000.0 + 400000000000.0 / loki::exp2(height / (1440.0 * 360.0)); // halved every year. - 1 year
+    result -= result % 100; // remove 2 last digits at HF V13
     return result;
   }
 
