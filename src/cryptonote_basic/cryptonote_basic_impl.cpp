@@ -99,7 +99,7 @@ namespace cryptonote {
     std::fesetround(FE_TONEAREST);
     uint64_t result = 0;
     // SEEME
-    if (version >= network_version_13_enforce_checkpoints) {
+    if (version >= network_version_13_enforce_checkpoints) { // increase tail emission but reduce current block reward
         result = 50000000000.0 + 200000000000.0 / loki::exp2(height / (1440.0 * 90.0)); // halve every 90 days.
         result -= result % 100; // remove 2 last digits at HF V13
     } else {
