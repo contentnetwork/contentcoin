@@ -147,9 +147,9 @@ namespace
   std::string get_default_ringdb_path()
   {
     boost::filesystem::path dir = tools::get_default_data_dir();
-    // remove .loki, replace with .blog-shared-ringdb
+    // remove .loki, replace with .cote-shared-ringdb
     dir = dir.remove_filename();
-    dir /= ".blog-shared-ringdb";
+    dir /= ".cote-shared-ringdb";
     return dir.string();
   }
 

@@ -139,9 +139,9 @@ static bool parse_db_sync_mode(std::string db_sync_mode)
 static std::string get_default_db_path()
 {
   boost::filesystem::path dir = tools::get_default_data_dir();
-  // remove .loki, replace with .blog-shared-ringdb
+  // remove .loki, replace with .cote-shared-ringdb
   dir = dir.remove_filename();
-  dir /= ".blog-shared-ringdb";
+  dir /= ".cote-shared-ringdb";
   return dir.string();
 }
 

@@ -158,7 +158,7 @@ endif()
 
 set_property(TARGET blockchain_import
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-import")
+	OUTPUT_NAME "contentcoin-blockchain-import")
 install(TARGETS blockchain_import DESTINATION bin)
 
 loki_add_executable(blockchain_export
@@ -179,7 +179,7 @@ target_link_libraries(blockchain_export
 
 set_property(TARGET blockchain_export
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-export")
+	OUTPUT_NAME "contentcoin-blockchain-export")
 install(TARGETS blockchain_export DESTINATION bin)
 
 loki_add_executable(blockchain_blackball
@@ -201,7 +201,7 @@ target_link_libraries(blockchain_blackball
 
 set_property(TARGET blockchain_blackball
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-mark-spent-outputs")
+	OUTPUT_NAME "contentcoin-blockchain-mark-spent-outputs")
 install(TARGETS blockchain_blackball DESTINATION bin)
 
 
@@ -223,7 +223,7 @@ target_link_libraries(blockchain_usage
 
 set_property(TARGET blockchain_usage
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-usage")
+	OUTPUT_NAME "contentcoin-blockchain-usage")
 install(TARGETS blockchain_usage DESTINATION bin)
 
 loki_add_executable(blockchain_ancestry
@@ -244,7 +244,7 @@ target_link_libraries(blockchain_ancestry
 
 set_property(TARGET blockchain_ancestry
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-ancestry")
+	OUTPUT_NAME "contentcoin-blockchain-ancestry")
 install(TARGETS blockchain_ancestry DESTINATION bin)
 
 loki_add_executable(blockchain_depth
@@ -265,7 +265,7 @@ target_link_libraries(blockchain_depth
 
 set_property(TARGET blockchain_depth
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-depth")
+	OUTPUT_NAME "contentcoin-blockchain-depth")
 install(TARGETS blockchain_depth DESTINATION bin)
 
 loki_add_executable(blockchain_stats
@@ -286,7 +286,7 @@ target_link_libraries(blockchain_stats
 
 set_property(TARGET blockchain_stats
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-stats")
+	OUTPUT_NAME "contentcoin-blockchain-stats")
 install(TARGETS blockchain_stats DESTINATION bin)
 
 loki_add_executable(blockchain_prune_known_spent_data
@@ -308,7 +308,7 @@ target_link_libraries(blockchain_prune_known_spent_data
 
 set_property(TARGET blockchain_prune_known_spent_data
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-prune-known-spent-data")
+	OUTPUT_NAME "contentcoin-blockchain-prune-known-spent-data")
 install(TARGETS blockchain_prune_known_spent_data DESTINATION bin)
 
 loki_add_executable(blockchain_prune
@@ -317,7 +317,7 @@ loki_add_executable(blockchain_prune
 
 set_property(TARGET blockchain_prune
 	PROPERTY
-	OUTPUT_NAME "blogcoin-blockchain-prune")
+	OUTPUT_NAME "contentcoin-blockchain-prune")
 install(TARGETS blockchain_prune DESTINATION bin)
 
 target_link_libraries(blockchain_prune

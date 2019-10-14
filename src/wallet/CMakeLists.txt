@@ -109,7 +109,7 @@ if (NOT LOKI_DAEMON_AND_WALLET_ONLY)
       ${EXTRA_LIBRARIES})
   set_property(TARGET wallet_rpc_server
     PROPERTY
-      OUTPUT_NAME "blogcoin-wallet-rpc")
+      OUTPUT_NAME "contentcoin-wallet-rpc")
   install(TARGETS wallet_rpc_server DESTINATION bin)
 endif()
 
