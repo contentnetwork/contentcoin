@@ -1,7 +1,7 @@
 # BlogCoin
 
 <p align="center">
-    <a href="https://github.com/contentnetwork/blogcoin/commits/dev"><img alt="pipeline status" src="https://raw.githubusercontent.com/contentnetwork/blogcoin/master/config/blog30x36.png" /></a>
+    <a href="https://github.com/contentnetwork/contentcoin/commits/dev"><img alt="pipeline status" src="https://raw.githubusercontent.com/contentnetwork/contentcoin/master/config/blog30x36.png" /></a>
 </p>
 
 - Copyright (c) 2019 The Blogcoin Project.
@@ -16,20 +16,20 @@
 | Operating System      | Processor | Status |
 | --------------------- | -------- |--------|
 
-- Blogcoin Platform: [theblogcoin.xyz](https://theblogcoin.xyz)
+- Blogcoin Platform: [thecontentcoin.xyz](https://thecontentcoin.xyz)
 - Explorer : [explorer-blog.semipool.com](http://explorer-blog.semipool.com)
-- GitHub: [https://github.com/contentnetwork/blogcoin](https://github.com/contentnetwork/blogcoin)
+- GitHub: [https://github.com/contentnetwork/contentcoin](https://github.com/contentnetwork/contentcoin)
 - Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
 
 ## Vulnerability disclosure
 
-- Check out our [Vulnerability Response Process](https://blogcoin.github.io/blogcoin-docs/Contributing/VULNERABILITY_RESPONSE_LOKI), encourages prompt disclosure of any Vulnerabilities
+- Check out our [Vulnerability Response Process](https://contentcoin.github.io/contentcoin-docs/Contributing/VULNERABILITY_RESPONSE_LOKI), encourages prompt disclosure of any Vulnerabilities
 
 ## Information
 
 BlogCoin is a fork of BitToro cryptocurrency. BlogCoin focus on content distribution.
 
-BlogCoin is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@blogcoin.network
+BlogCoin is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@contentcoin.network
 
 ## Compiling BlogCoin from source
 
@@ -84,11 +84,11 @@ FreeBSD one liner for required to build dependencies
 
 Clone recursively to pull-in needed submodule(s):
 
-`$ git clone --recursive https://github.com/contentnetwork/blogcoin`
+`$ git clone --recursive https://github.com/contentnetwork/contentcoin`
 
 If you already have a repo cloned, initialize and update:
 
-`$ cd blogcoin && git submodule init && git submodule update`
+`$ cd contentcoin && git submodule init && git submodule update`
 
 ### Build instructions
 
@@ -100,7 +100,7 @@ invokes cmake commands as needed.
 * Install the dependencies
 * Change to the root of the source code directory, change to the most recent release branch, and build:
 
-        cd blogcoin
+        cd contentcoin
         git checkout master
         make
 
@@ -120,9 +120,9 @@ invokes cmake commands as needed.
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/blogcoin/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/contentcoin/build/release/bin"` to `.profile`
 
-* Run BlogCoin with `blogcoind --detach`
+* Run BlogCoin with `contentcoind --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -161,10 +161,10 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 ```
 * If using an external hard disk without an external power supply, ensure it gets enough power to avoid hardware issues when syncing, by adding the line "max_usb_current=1" to /boot/config.txt
 
-* Clone blogcoin and checkout most recent release version:
+* Clone contentcoin and checkout most recent release version:
 ```
-        git clone https://github.com/contentnetwork/blogcoin.git
-	cd blogcoin
+        git clone https://github.com/contentnetwork/contentcoin.git
+	cd contentcoin
 	git checkout master
 ```
 * Build:
@@ -175,9 +175,9 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/blogcoin/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/contentcoin/build/release/bin"` to `.profile`
 
-* Run BlogCoin with `blogcoind --detach`
+* Run BlogCoin with `contentcoind --detach`
 
 * You may wish to reduce the size of the swap file after the build has finished, and delete the boost directory from your home directory
 
@@ -211,7 +211,7 @@ If you are using the older Raspbian Jessie image, compiling BlogCoin is a bit mo
 ```
 * Wait ~4 hours
 
-* From here, follow the [general Raspberry Pi instructions](#on-the-raspberry-pi) from the "Clone blogcoin and checkout most recent release version" step.
+* From here, follow the [general Raspberry Pi instructions](#on-the-raspberry-pi) from the "Clone contentcoin and checkout most recent release version" step.
 
 #### On Windows:
 
@@ -257,15 +257,15 @@ application.
 
 * To git clone, run:
 
-        git clone --recursive https://github.com/contentnetwork/blogcoin.git
+        git clone --recursive https://github.com/contentnetwork/contentcoin.git
 
 **Building**
 
 * Change to the cloned directory, run:
 	
-        cd ~/blogcoin
+        cd ~/contentcoin
 
-* **Optional**: if you would like a specific [version/tag](https://github.com/contentnetwork/blogcoin/tags), do a git checkout for that version. eg. 'v2.0.3'. If you dont care about the version and just want binaries from master, skip this step:
+* **Optional**: if you would like a specific [version/tag](https://github.com/contentnetwork/contentcoin/tags), do a git checkout for that version. eg. 'v2.0.3'. If you dont care about the version and just want binaries from master, skip this step:
 	
         git checkout v2.0.3
 
@@ -277,7 +277,7 @@ application.
 
         make release-static-win32
 
-* The resulting executables can be found in `build/<MinGW version>/<blogcoin version>/release/bin`
+* The resulting executables can be found in `build/<MinGW version>/<contentcoin version>/release/bin`
 
 * **Optional**: to build Windows binaries suitable for debugging on a 64-bit system, run:
 
@@ -287,11 +287,11 @@ application.
 
         make debug-static-win32
 
-* The resulting executables can be found in `build/<MinGW version>/<blogcoin version>/debug/bin`
+* The resulting executables can be found in `build/<MinGW version>/<contentcoin version>/debug/bin`
 
 ### On FreeBSD:
 
-The project can be built from scratch by following instructions for Linux above. If you are running blogcoin in a jail you need to add the flag: `allow.sysvipc=1` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
+The project can be built from scratch by following instructions for Linux above. If you are running contentcoin in a jail you need to add the flag: `allow.sysvipc=1` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
 
 ### On OpenBSD:
 
@@ -379,7 +379,7 @@ cmake ..
 doas make install
 ```
 
-Build blogcoin: `env DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/usr/local make release-static`
+Build contentcoin: `env DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/usr/local make release-static`
 
 #### OpenBSD >= 6.4
 
@@ -412,13 +412,13 @@ Then you can run make as usual.
 ### On Linux for Android (using docker):
 
         # Build image (for ARM 32-bit)
-        docker build -f utils/build_scripts/android32.Dockerfile -t blogcoin-android .
+        docker build -f utils/build_scripts/android32.Dockerfile -t contentcoin-android .
         # Build image (for ARM 64-bit)
-        docker build -f utils/build_scripts/android64.Dockerfile -t blogcoin-android .
+        docker build -f utils/build_scripts/android64.Dockerfile -t contentcoin-android .
         # Create container
-        docker create -it --name blogcoin-android blogcoin-android bash
+        docker create -it --name contentcoin-android contentcoin-android bash
         # Get binaries
-        docker cp blogcoin-android:/src/build/release/bin .
+        docker cp contentcoin-android:/src/build/release/bin .
 
 ### Building portable statically linked binaries
 
@@ -455,29 +455,29 @@ The produced binaries still link libc dynamically. If the binary is compiled on 
 * Docker
 
         # Build using all available cores
-        docker build -t blogcoin .
+        docker build -t contentcoin .
 
         # or build using a specific number of cores (reduce RAM requirement)
-        docker build --build-arg NPROC=1 -t blogcoin .
+        docker build --build-arg NPROC=1 -t contentcoin .
 
         # either run in foreground
-        docker run -it -v /blogcoin/chain:/root/.blogcoin -v /blogcoin/wallet:/wallet -p 22022:22022 blogcoin
+        docker run -it -v /contentcoin/chain:/root/.contentcoin -v /contentcoin/wallet:/wallet -p 22022:22022 contentcoin
 
         # or in background
-        docker run -it -d -v /blogcoin/chain:/root/.blogcoin -v /blogcoin/wallet:/wallet -p 22022:22022 blogcoin
+        docker run -it -d -v /contentcoin/chain:/root/.contentcoin -v /contentcoin/wallet:/wallet -p 22022:22022 contentcoin
 
 * The build needs 3 GB space.
 * Wait one  hour or more
 
-## Running blogcoind
+## Running contentcoind
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in
 foreground:
 
-    ./bin/blogcoind
+    ./bin/contentcoind
 
-To list all available options, run `./bin/blogcoind --help`.  Options can be
+To list all available options, run `./bin/contentcoind --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -485,7 +485,7 @@ of the argument without the leading dashes, for example `log-level=1`.
 
 To run in background:
 
-    ./bin/blogcoind --log-file blogcoind.log --detach
+    ./bin/contentcoind --log-file contentcoind.log --detach
 
 ## Internationalization
 
@@ -497,27 +497,27 @@ While BlogCoin isn't made to integrate with Tor, it can be used wrapped with tor
 setting the following configuration parameters and environment variables:
 
 * `--p2p-bind-ip 127.0.0.1` on the command line or `p2p-bind-ip=127.0.0.1` in
-  blogcoind.conf to disable listening for connections on external interfaces.
-* `--no-igd` on the command line or `no-igd=1` in blogcoind.conf to disable IGD
+  contentcoind.conf to disable listening for connections on external interfaces.
+* `--no-igd` on the command line or `no-igd=1` in contentcoind.conf to disable IGD
   (UPnP port forwarding negotiation), which is pointless with Tor.
 * `DNS_PUBLIC=tcp` or `DNS_PUBLIC=tcp://x.x.x.x` where x.x.x.x is the IP of the
   desired DNS server, for DNS requests to go over TCP, so that they are routed
-  through Tor. When IP is not specified, blogcoind uses the default list of
+  through Tor. When IP is not specified, contentcoind uses the default list of
   servers defined in [src/common/dns_utils.cpp](src/common/dns_utils.cpp).
-* `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow blogcoind to bind to interfaces
+* `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow contentcoind to bind to interfaces
    to accept connections from the wallet. On some Linux systems, torsocks
    allows binding to localhost by default, so setting this variable is only
    necessary to allow binding to local LAN/VPN interfaces to allow wallets to
    connect from remote hosts. On other systems, it may be needed for local wallets
    as well.
 * Do NOT pass `--detach` when running through torsocks with systemd, (see
-  [utils/systemd/blogcoind.service](utils/systemd/blogcoind.service) for details).
+  [utils/systemd/contentcoind.service](utils/systemd/contentcoind.service) for details).
 * If you use the wallet with a Tor daemon via the loopback IP (eg, 127.0.0.1:9050),
   then use `--untrusted-daemon` unless it is your own hidden service.
 
-Example command line to start blogcoind through Tor:
+Example command line to start contentcoind through Tor:
 
-    DNS_PUBLIC=tcp torsocks blogcoind --p2p-bind-ip 127.0.0.1 --no-igd
+    DNS_PUBLIC=tcp torsocks contentcoind --p2p-bind-ip 127.0.0.1 --no-igd
 
 ### Using Tor on Tails
 
@@ -526,7 +526,7 @@ to add a rule to allow this connection too, in addition to telling torsocks to
 allow inbound connections. Full example:
 
     sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT
-    DNS_PUBLIC=tcp torsocks ./blogcoind --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
+    DNS_PUBLIC=tcp torsocks ./contentcoind --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
         --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain
 
 ## Debugging
@@ -544,7 +544,7 @@ Run the build.
 Once it stalls, enter the following command:
 
 ```
-gdb /path/to/blogcoind `pidof blogcoind`
+gdb /path/to/contentcoind `pidof contentcoind`
 ```
 
 Type `thread apply all bt` within gdb in order to obtain the stack trace
@@ -557,21 +557,21 @@ Enter `echo core | sudo tee /proc/sys/kernel/core_pattern` to stop cores from be
 
 Run the build.
 
-When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as blogcoind. It may be named just `core`, or `core.xxxx` with numbers appended.
+When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as contentcoind. It may be named just `core`, or `core.xxxx` with numbers appended.
 
 You can now analyse this core dump with `gdb` as follows:
 
-`gdb /path/to/blogcoind /path/to/dumpfile`
+`gdb /path/to/contentcoind /path/to/dumpfile`
 
 Print the stack trace with `bt`
 
-* To run blogcoin within gdb:
+* To run contentcoin within gdb:
 
-Type `gdb /path/to/blogcoind`
+Type `gdb /path/to/contentcoind`
 
 Pass command-line options with `--args` followed by the relevant arguments
 
-Type `run` to run blogcoind
+Type `run` to run contentcoind
 
 ### Analysing memory corruption
 
@@ -583,11 +583,11 @@ Configure BlogCoin with the -D SANITIZE=ON cmake flag, eg:
 
     cd build/debug && cmake -D SANITIZE=ON -D CMAKE_BUILD_TYPE=Debug ../..
 
-You can then run the blogcoin tools normally. Performance will typically halve.
+You can then run the contentcoin tools normally. Performance will typically halve.
 
 * valgrind
 
-Install valgrind and run as `valgrind /path/to/blogcoind`. It will be very slow.
+Install valgrind and run as `valgrind /path/to/contentcoind`. It will be very slow.
 
 ### LMDB
 
@@ -595,7 +595,7 @@ Instructions for debugging suspected blockchain corruption as per @HYC
 
 There is an `mdb_stat` command in the LMDB source that can print statistics about the database but it's not routinely built. This can be built with the following command:
 
-`cd ~/blogcoin/external/db_drivers/liblmdb && make`
+`cd ~/contentcoin/external/db_drivers/liblmdb && make`
 
 The output of `mdb_stat -ea <path to blockchain dir>` will indicate inconsistencies in the blocks, block_heights and block_info table.
 
