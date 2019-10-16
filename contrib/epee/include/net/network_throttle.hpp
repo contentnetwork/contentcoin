@@ -105,7 +105,7 @@ typedef calculate_times_struct calculate_times_struct;
 class network_throttle_manager {
 	// provides global (singleton) in/inreq/out throttle access
 
-	// [[note1]] see also http://www.nuonsoft.com/xxxxxx/2012/10/21/implementing-a-thread-safe-singleton-with-c11/
+	// [[note1]] see also http://www.nuonsoft.com/blog/2012/10/21/implementing-a-thread-safe-singleton-with-c11/
 	// [[note2]] _inreq is the requested in traffic - we anticipate we will get in-bound traffic soon as result of what we do (e.g. that we sent network downloads requests)
 	
 	//protected:
