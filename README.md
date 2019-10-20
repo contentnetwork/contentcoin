@@ -1,4 +1,4 @@
-# BlogCoin
+# ContentCoin
 
 <p align="center">
     <a href="https://github.com/contentnetwork/contentcoin/commits/dev"><img alt="pipeline status" src="https://raw.githubusercontent.com/contentnetwork/contentcoin/master/config/blog30x36.png" /></a>
@@ -17,7 +17,7 @@
 | --------------------- | -------- |--------|
 
 - Blogcoin Platform: [thecontentcoin.xyz](https://thecontentcoin.xyz)
-- Explorer : [explorer-blog.semipool.com](http://explorer-blog.semipool.com)
+- Explorer : [explorer-blog.semipool.com](http://explorercote.semipool.com)
 - GitHub: [https://github.com/contentnetwork/contentcoin](https://github.com/contentnetwork/contentcoin)
 - Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
 
@@ -27,11 +27,11 @@
 
 ## Information
 
-BlogCoin is a fork of BitToro cryptocurrency. BlogCoin focus on content distribution.
+ContentCoin is a fork of BitToro cryptocurrency. ContentCoin focus on content distribution.
 
-BlogCoin is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@contentcoin.network
+ContentCoin is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@contentcoin.network
 
-## Compiling BlogCoin from source
+## Compiling ContentCoin from source
 
 ### Dependencies
 
@@ -92,7 +92,7 @@ If you already have a repo cloned, initialize and update:
 
 ### Build instructions
 
-BlogCoin uses the CMake build system and a top-level [Makefile](Makefile) that
+ContentCoin uses the CMake build system and a top-level [Makefile](Makefile) that
 invokes cmake commands as needed.
 
 #### On Linux and OS X
@@ -113,7 +113,7 @@ invokes cmake commands as needed.
     https://github.com/zeromq/cppzmq to `/usr/local/include` should fix that error.
 
     *Note*: The instructions above will compile the most stable release of the
-    BlogCoin software. If you would like to use and test the most recent software,
+    ContentCoin software. If you would like to use and test the most recent software,
     use ```git checkout master```. The master branch may contain updates that are
     both unstable and incompatible with release software, though testing is always
     encouraged.
@@ -122,7 +122,7 @@ invokes cmake commands as needed.
 
 * Add `PATH="$PATH:$HOME/contentcoin/build/release/bin"` to `.profile`
 
-* Run BlogCoin with `contentcoind --detach`
+* Run ContentCoin with `contentcoind --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -150,7 +150,7 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * `apt-get update && apt-get upgrade` to install all of the latest software
 
-* Install the dependencies for BlogCoin from the 'Debian' column in the table above.
+* Install the dependencies for ContentCoin from the 'Debian' column in the table above.
 
 * Increase the system swap size:
 ```
@@ -177,13 +177,13 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * Add `PATH="$PATH:$HOME/contentcoin/build/release/bin"` to `.profile`
 
-* Run BlogCoin with `contentcoind --detach`
+* Run ContentCoin with `contentcoind --detach`
 
 * You may wish to reduce the size of the swap file after the build has finished, and delete the boost directory from your home directory
 
 #### *Note for Raspbian Jessie users:*
 
-If you are using the older Raspbian Jessie image, compiling BlogCoin is a bit more complicated. The version of Boost available in the Debian Jessie repositories is too old to use with BlogCoin, and thus you must compile a newer version yourself. The following explains the extra steps, and has been tested on a Raspberry Pi 2 with a clean install of minimal Raspbian Jessie.
+If you are using the older Raspbian Jessie image, compiling ContentCoin is a bit more complicated. The version of Boost available in the Debian Jessie repositories is too old to use with ContentCoin, and thus you must compile a newer version yourself. The following explains the extra steps, and has been tested on a Raspberry Pi 2 with a clean install of minimal Raspbian Jessie.
 
 * As before, `apt-get update && apt-get upgrade` to install all of the latest software, and increase the system swap size
 
@@ -194,7 +194,7 @@ If you are using the older Raspbian Jessie image, compiling BlogCoin is a bit mo
 	sudo /etc/init.d/dphys-swapfile start  
 ```
 
-* Then, install the dependencies for BlogCoin except `libunwind` and `libboost-all-dev`
+* Then, install the dependencies for ContentCoin except `libunwind` and `libboost-all-dev`
 
 * Install the latest version of boost (this may first require invoking `apt-get remove --purge libboost*` to remove a previous version if you're not using a clean install):
 ```
@@ -306,7 +306,7 @@ The doxygen and graphviz packages are optional and require the xbase set.
 The Boost package has a bug that will prevent librpc.a from building correctly. In order to fix this, you will have to Build boost yourself from scratch. Follow the directions here (under "Building Boost"):
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-openbsd.md
 
-You will have to add the serialization, date_time, and regex modules to Boost when building as they are needed by BlogCoin.
+You will have to add the serialization, date_time, and regex modules to Boost when building as they are needed by ContentCoin.
 
 To build: `env CC=egcc CXX=eg++ CPP=ecpp DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/path/to/the/boost/you/built make release-static-64`
 
@@ -446,11 +446,11 @@ You can also cross-compile static binaries on Linux for Windows and macOS with t
 
 The required packages are the names for each toolchain on apt. Depending on your distro, they may have different names.
 
-Using `depends` might also be easier to compile BlogCoin on Windows than using MSYS. Activate Windows Subsystem for Linux (WSL) with a distro (for example Ubuntu), install the apt build-essentials and follow the `depends` steps as depicted above.
+Using `depends` might also be easier to compile ContentCoin on Windows than using MSYS. Activate Windows Subsystem for Linux (WSL) with a distro (for example Ubuntu), install the apt build-essentials and follow the `depends` steps as depicted above.
 
 The produced binaries still link libc dynamically. If the binary is compiled on a current distribution, it might not run on an older distribution with an older installation of libc. Passing `-DBACKCOMPAT=ON` to cmake will make sure that the binary will run on systems having at least libc version 2.17.
 
-## Installing BlogCoin from a package
+## Installing ContentCoin from a package
 
 * Docker
 
@@ -493,7 +493,7 @@ See [README.i18n.md](README.i18n.md).
 
 ## Using Tor
 
-While BlogCoin isn't made to integrate with Tor, it can be used wrapped with torsocks, by
+While ContentCoin isn't made to integrate with Tor, it can be used wrapped with torsocks, by
 setting the following configuration parameters and environment variables:
 
 * `--p2p-bind-ip 127.0.0.1` on the command line or `p2p-bind-ip=127.0.0.1` in
@@ -531,7 +531,7 @@ allow inbound connections. Full example:
 
 ## Debugging
 
-This section contains general instructions for debugging failed installs or problems encountered with BlogCoin. First ensure you are running the latest version built from the Github repo.
+This section contains general instructions for debugging failed installs or problems encountered with ContentCoin. First ensure you are running the latest version built from the Github repo.
 
 ### Obtaining stack traces and core dumps on Unix systems
 
@@ -579,7 +579,7 @@ There are two tools available:
 
 * ASAN
 
-Configure BlogCoin with the -D SANITIZE=ON cmake flag, eg:
+Configure ContentCoin with the -D SANITIZE=ON cmake flag, eg:
 
     cd build/debug && cmake -D SANITIZE=ON -D CMAKE_BUILD_TYPE=Debug ../..
 
