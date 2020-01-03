@@ -1,5 +1,4 @@
-# Copyright (c) 2018, The Loki Project
-# Copyright (c) 2014-2019, The Monero Project
+# Copyright (c) 2019, The Loki Project
 #
 # All rights reserved.
 #
@@ -27,43 +26,23 @@
 # STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 # THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cmake_minimum_required (VERSION 2.6)
-project (loki CXX)
+set(quorumnet_sources
+  sn_network.cpp
+  bt_serialize.cpp)
 
-set(p2p_sources
-  net_node.cpp
-  net_node.inl
-  net_peerlist.cpp
-)
+set(quorumnet_headers
+    )
 
-set(p2p_headers)
-set(p2p_private_headers
-  net_node_common.h
-  net_node.h
-  net_peerlist_boost_serialization.h
-  net_peerlist.h
-  p2p_protocol_defs.h
-  stdafx.h
-)
+set(quorumnet_private_headers
+  sn_network.h
+  bt_serialize.h
+  common.h
+  conn_matrix.h)
 
-loki_private_headers(p2p
-  ${p2p_private_headers})
-loki_add_library(p2p
-  ${p2p_sources}
-  ${p2p_headers}
-  ${p2p_private_headers})
-
-target_link_libraries(p2p
-  PUBLIC
-    version
-    cryptonote_core
-    net
-    ${MINIUPNPC_LIBRARIES}
-    ${Boost_CHRONO_LIBRARY}
-    ${Boost_PROGRAM_OPTIONS_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_THREAD_LIBRARY}
-    ${Boost_SERIALIZATION_LIBRARY}
-  PRIVATE
-    ${EXTRA_LIBRARIES})
+loki_private_headers(quorumnet
+  ${quorumnet_private_headers})
+loki_add_library(quorumnet
+  ${quorumnet_sources}
+  ${quorumnet_headers}
+  ${quorumnet_private_headers})
+target_link_libraries(quorumnet PRIVATE ${ZMQ_LIBRARIES})
