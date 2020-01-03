@@ -750,7 +750,7 @@ bool t_rpc_command_executor::show_status() {
         str << get_human_time_ago(ires.last_lokinet_ping, time(nullptr), true /*abbreviate*/);
     else
         str << "NOT RECEIVED";
-    str << " (lokinet)";
+    str << " (xtornet)";
 
 
     tools::success_msg_writer() << str.str();
