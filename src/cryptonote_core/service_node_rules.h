@@ -138,7 +138,7 @@ namespace service_nodes {
     {
       case cryptonote::FAKECHAIN: return 30;
       case cryptonote::TESTNET:   return BLOCKS_EXPECTED_IN_DAYS(2);
-      default:                    return BLOCKS_EXPECTED_IN_DAYS(30);
+      default:                    return BLOCKS_EXPECTED_IN_DAYS(7);
     }
   }
 
