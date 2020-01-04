@@ -1998,16 +1998,16 @@ namespace cryptonote
         {
           if (hf_version >= cryptonote::network_version_14_blink_lns)
           {
-            MGINFO_RED(
-                "Failed to submit uptime proof: have not heard from xtornet recently. Make sure that it "
-                "is running! It is required to run alongside the Loki daemon");
+            // MGINFO_RED(
+            //    "Failed to submit uptime proof: have not heard from xtornet recently. Make sure that it "
+            //    "is running! It is required to run alongside the Loki daemon");
             // return;
           }
           else
           {
-            MGINFO_RED(
-                "Have not heard from xtornet recently. Make sure that it is running! "
-                "It is required to run alongside the Bittoro daemon after hard fork 14");
+            // MGINFO_RED(
+            //    "Have not heard from xtornet recently. Make sure that it is running! "
+            //    "It is required to run alongside the Bittoro daemon after hard fork 14");
           }
         }
 
