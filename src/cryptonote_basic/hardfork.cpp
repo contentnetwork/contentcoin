@@ -71,7 +71,7 @@ static constexpr HardFork::Params mainnet_hard_forks[] = // SEEME
   { network_version_11_infinite_staking, 115,	0, 1556170400 }, // 2019-06-26 13:00AEDT
   { network_version_12_checkpointing,    200,  0, 1563990800  }, // 2019-07-30 14:00AEDT
   { network_version_13_enforce_checkpoints, 143746, 0, 1565286800 }, // 2019-10-24 19:00AEDT
-  { network_version_14_blink_lns,           316546, 0, 1578528000 }, // 2020-05-05 00:00UTC
+  { network_version_14_blink_lns,           414717, 0, 1578528000 }, // 2020-05-05 00:00UTC
 };
 
 static constexpr HardFork::Params testnet_hard_forks[] =
