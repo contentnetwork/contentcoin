@@ -16,8 +16,8 @@
 | Operating System      | Processor | Status |
 | --------------------- | -------- |--------|
 
-- Blogcoin Platform: [thecontentcoin.xyz](https://thecontentcoin.xyz)
-- Explorer : [explorer-blog.semipool.com](http://explorercote.semipool.com)
+- Blogcoin Platform: [contentdex.com](https://contentdex.com)
+- Explorer : [explorer.contentdex.com](https://explorer.contentdex.com)
 - GitHub: [https://github.com/contentnetwork/contentcoin](https://github.com/contentnetwork/contentcoin)
 - Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
 
