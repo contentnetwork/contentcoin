@@ -4,7 +4,7 @@
     <a href="https://github.com/contentnetwork/contentcoin/commits/dev"><img alt="pipeline status" src="https://raw.githubusercontent.com/contentnetwork/contentcoin/master/config/blog30x36.png" /></a>
 </p>
 
-- Copyright (c) 2019 The Blogcoin Project.
+- Copyright (c) 2019 The Contentcoin Project.
 - Copyright (c) 2019 The BitToro Project.
 - Copyright (c) 2019 The TurtleCoin Developers
 - Copyright (c) 2018-2019 Project Triton.
@@ -16,7 +16,7 @@
 | Operating System      | Processor | Status |
 | --------------------- | -------- |--------|
 
-- Blogcoin Platform: [contentdex.com](https://contentdex.com)
+- Contentcoin Decentralized Platform: [contentdex.com](https://contentdex.com)
 - Explorer : [explorer.contentdex.com](https://explorer.contentdex.com)
 - GitHub: [https://github.com/contentnetwork/contentcoin](https://github.com/contentnetwork/contentcoin)
 - Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
