@@ -19,7 +19,7 @@
 - Contentcoin Decentralized Platform: [contentdex.com](https://contentdex.com)
 - Explorer : [explorer.contentdex.com](https://explorer.contentdex.com)
 - GitHub: [https://github.com/contentnetwork/contentcoin](https://github.com/contentnetwork/contentcoin)
-- Discord: [https://discord.gg/xH4QZxe](https://discord.gg/xH4QZxe)
+- Discord: [https://discord.gg/gSAbspD](https://discord.gg/gSAbspD)
 
 ## Vulnerability disclosure
 
